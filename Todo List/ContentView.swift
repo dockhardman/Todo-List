@@ -27,6 +27,12 @@ struct ContentView: View {
                     }
                     .padding(.leading, 5)
                 }.padding()
+                
+                List {
+                    Text("this is something in my list!")
+                    Text("This is also in my list!")
+                    Text("And another thing!")
+                }
             }
             .navigationBarTitle("Todo List")
         }
