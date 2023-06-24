@@ -29,9 +29,9 @@ struct ContentView: View {
                 }.padding()
                 
                 List {
-                    Text("this is something in my list!")
-                    Text("This is also in my list!")
-                    Text("And another thing!")
+                    ForEach(todos) { todoEntry in
+                        Text(todoEntry.todo)
+                    }
                 }
             }
             .navigationBarTitle("Todo List")
