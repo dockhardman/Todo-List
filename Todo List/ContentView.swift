@@ -22,20 +22,21 @@ struct ContentView: View {
                         guard !self.currentTodo.isEmpty else { return }
                         self.todos.append(Item(todo: self.currentTodo))
                         self.currentTodo = ""
+                        self.save()
                     }) {
                         Image(systemName: "text.badge.plus")
                     }
                     .padding(.leading, 5)
                 }.padding()
                 
-                List {
+                List{
                     ForEach(todos) { todoEntry in
                         Text(todoEntry.todo)
-                    }
+                    }.onDelete(perform: self.delete)
                 }
             }
             .navigationBarTitle("Todo List")
-        }
+        }.onAppear(perform: self.load)
     }
     
     private func save() {
