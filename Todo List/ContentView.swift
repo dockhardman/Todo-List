@@ -37,6 +37,25 @@ struct ContentView: View {
             .navigationBarTitle("Todo List")
         }
     }
+    
+    private func save() {
+        UserDefaults.standard.set(
+            try? PropertyListEncoder().encode(self.todos), forKey: "myTodosKey"
+        )
+    }
+    
+    private func load() {
+        if let todosData = UserDefaults.standard.value(forKey: "myTodosKey") as? Data {
+            if let todosList = try? PropertyListDecoder().decode(Array<Item>.self, from: todosData) {
+                self.todos = todosList
+            }
+        }
+    }
+    
+    private func delete(at offset: IndexSet) {
+        self.todos.remove(atOffsets: offset)
+        save()
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
